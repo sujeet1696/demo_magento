@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+
+</head>
+
+
+<script type="text/javascript">
+   require(['jquery', 'jquery/ui'], function($){
+     $(document).ready(function() {
+         $.ajax({
+           type: "GET",
+           url: "<?php echo $block->getBaseUrl().'hello/index/showall'; ?>",
+           data: {},
+           datatype: "text",
+           success: function(response) {
+             // debugger
+          var obj = $.parseJSON(response);
+          if(obj.data.length > 0) {
+            let records = obj.data;
+            for (var i = 0; i < records.length; i++) {
+              $('#listing').append('<tr id = list_'+records[i].id +' ><td></td><td>'+ records[i].name + '</td><td>' + records[i].email+ '</td><td>' + records[i].phone_number + '</td><td>' + records[i].password+ '</td><td>' + records[i].description + '</td><td>' +
+              '<button type="button" id='+records[i].id +' name="edit"  value='+records[i].id +'>Edit</button></td>'+
+              '<td><button type="button" id='+records[i].id +' name="delete" onclick="deleteData('+ records[i].id +')"   value='+records[i].id +'>Delete</button></td></tr>');
+            }
+
+          } else {
+
+            $('#listing').append('<tr><td colspan="8" style="text-align: center;" >'+ "Record Not Found"+ '</td></tr>');
+
+          }
+
+          }
+         });
+
+   });
+ });
+
+
+function deleteData(Id){
+  // debugger
+  console.log(Id);
+   require(['jquery', 'jquery/ui'], function($){
+$.ajax({
+    type: "POST",
+    url: "<?php echo $block->getBaseUrl().'hello/index/delete'; ?>",
+    data: {"id":Id, },
+    datatype:"text",
+    success: function(response)
+    {
+      debugger
+      console.log(response);
+     var obj = $.parseJSON(response);
+
+     // console.log(obj.status);
+     // console.log(obj.msg);
+    // console.log(obj.data['id']);
+     //
+     if(obj.status==true){
+       $('#list_'+Id).remove();
+       alert(obj.msg);
+     }
+     else {
+       alert(obj.msg);
+     }
+
+     // $msg=obj.msg;
+     // alert($msg);
+}
+});
+ });
+}
+
+// function edit() {
+//
+//   location.href = '<?php echo $block->getBaseUrl().'hello/frontend/template/update.phtml'; ?>';
+// }
+
+</script>
+
+
+<body>
+  <input style="float: right;;" type="submit" value="Add Records"> 
+  <center>
+
+    <h1>Details</h1>
+      <table border="" id="listing" class="css-serial">
+        <tr style="background-color: green;">
+          <th>Serial</th>
+          <th>Name</th>
+          <th>email</th>
+          <th>phone_number</th>
+          <th>password</th>
+          <th>description</th>
+          <!-- <th>Edit</th>
+          <th>Delete</th> -->
+          <th colspan="2" style="text-align: center;">db_Operation</th>
+        </tr>
+      </table>
+
+  </center>
+</body>
+</html>

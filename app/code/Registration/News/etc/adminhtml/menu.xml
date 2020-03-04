@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+  <menu>
+    <add id="Registration_News::registration" title="REGISTRATION" translate="title" module="Registration_News"
+         sortOrder="90" dependsOnModule="Registration_News" resource="Registration_News::registration"/>
+    <add id="Registration_News::news" title="NEWS" translate="title" module="Registration_News"
+        parent="Registration_News::registration"   sortOrder="50" dependsOnModule="Registration_News" resource="Registration_News::news"/>
+    <add id="Registration_News::news_allnews" title="ALL NEWS" translate="title" module="Registration_News"
+        parent="Registration_News::news"   sortOrder="50" dependsOnModule="Registration_News" action="news/allnews" resource="Registration_News::news_allnews"/>
+  </menu>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+  <head>
+    <title>
+      News
+    </title>
+  </head>
+  <body>
+    <referenceContainer name="content">
+      <block class="\Registration\News\Block\display" template="Registration_News::allnews.phtml"/>
+    </referenceContainer>
+  </body>
+</config>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <center>
+    <h2>Delete Record </h2>
+    <form action="<?php echo $block->getBaseUrl().'hello/index/Delete'; ?>" method="post">
+      Email Id:<br>
+      <input type="email" name="email"  placeholder="EmailId" required>
+      <br><br>
+      <input type="submit" value="Delete"> <input type="button" value="Back" onclick="gotodashboard()">
+      <br><br>
+    </form>
+  </center>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <type name="First\HelloWorld\Controller\Index\Index">
+        <plugin name="First_HelloWorld_Plugin" type="First\HelloWorld\Plugin\ExamplePlugin" sortOrder="10" disabled="false"/>
+    </type>
+</config>

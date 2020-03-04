@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<script type="text/javascript">
+   require(['jquery', 'jquery/ui'], function($){
+     $(document).ready(function() {
+       $('#find').click(function(e) {
+         e.preventDefault();
+         var id = $('input[name=id]').val();
+         console.log(id);
+         $.ajax({
+           type: "POST",
+           url: "<?php echo $block->getBaseUrl().'hello/index/search'; ?>",
+           data: {
+             "id": id,
+           },
+           datatype: "text",
+           success: function(response) {
+          var obj = $.parseJSON(response);
+
+          $id1 = obj.data.id;
+          $name1 = obj.data.name;
+          $email1 = obj.data.email;
+          $phno1 = obj.data.phone_number;
+          $pass1 = obj.data.password;
+          $description = obj.data.description;
+
+          document.forms['finddata']['id'].value = $id1;
+          document.forms['finddata']['name'].value = $name1;
+          document.forms['finddata']['email'].value = $email1;
+          document.forms['finddata']['number'].value = $phno1;
+          document.forms['finddata']['password'].value = $pass1;
+          document.forms['finddata']['description'].value = $description;
+
+
+
+           }
+         });
+     });
+
+   });
+ });
+</script>
+
+
+<body>
+  <center>
+    <h2>Update Details</h2>
+    <form action="<?php echo $block->getBaseUrl().'hello/index/update'; ?>" method="post" id="finddata" onsubmit="return checkForm(this);">
+
+      Id:<br>
+      <input type="number" id="id" name="id" placeholder="Id" required> &nbsp;&nbsp;&nbsp;
+      <input id="find" type="button" value="Find">
+      <br>
+      Name:<br>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+      <br>
+      email:<br>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <br>
+      Phone Number:<br>
+      <input type="number" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+      <br>
+      Password:<br>
+      <input type="text" id="password" name="password" placeholder="Password" required>
+      <br>
+      Description:<br>
+      <textarea id ="description" title="description" name="description" placeholder="Description" rows="4" cols="50" required ></textarea>
+      <br><br>
+      <input type="submit" value="Update"> <input type="button" value="Back" onclick="gotodashboard()">
+
+      <br><br>
+
+    </form>
+  </center>
+
+
+</body>
+
+</html>
