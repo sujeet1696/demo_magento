@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<?php
+      $blogType = array(1 => 'Faishain', 2 => 'Food', 3 => 'Travel', 4 => 'Food', 5 => 'Fitness', 6 => 'Sport');
+      $gridrecords = $block->getTestCollection();
+      $records = $gridrecords->getData();
+?>
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+</head>
+<body>
+
+  <input style="float: right;;" type="submit" value="Add Record" onclick="location.href='http://127.0.0.1/megento2.3.3/blog';">
+  <center>
+    <input type="text" title ="search" id="search_text" name="search_text" onkeyup="searchData()" autocomplete="off" placeholder="Search" style="margin-left:-752px;width:300px" />
+    <h1>Listing Of Records</h1>
+      <table border="" id="listing"> 
+        <thead>
+          <tr style="background-color: green;">
+            <th>Serial</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Blog Title</th>
+            <th>Description</th>
+            <th>Blog_Type</th>
+            <!-- <th>Edit</th>
+            <th>Delete</th> -->
+            <th colspan="3" style="text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if(count($records) > 0) {
+            foreach ($records as $index => $record) { ?>
+              <tr  class="css-serial" id="list_<?php echo $record['id'];?>">
+                <td><?php echo $index+1;?></td>
+                <td> <?php echo $record['user_name']; ?></td>
+                <td> <?php echo $record['email_id']; ?></td>
+                <td> <?php echo $record['phone_number']; ?></td>
+                <td> <?php echo $record['title']; ?></td>
+                <td> <?php echo $record['description']; ?></td>
+                <td> <?php echo (isset($record['blog_type']) && !empty($record['blog_type'])) ? $blogType[$record['blog_type']] : 'Not defined'; ?></td>
+                <td><button ><input type="button" style="color:brown;" value="Edit" onclick="location.href='http://127.0.0.1/megento2.3.3/blog?id=<?php echo $record['id'];?>&method_type=GET_DATA';"></button></td>
+                <td><button type="button" name="button" onclick="showDetail(<?php echo $record['id'];?>)"> Detail</button></td>
+                <td><button type="button" name="button" onclick="deleteRecord(<?php echo $record['id'];?>)"> Delete</button></td>
+              </tr>
+          <?php }} else { ?>
+            <tr colspan="8" style="text-align: center;"> Record not found </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+
+  </center>
+  <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php endif ?>
+</body>
+</html>
+
+<script type="text/javascript">
+    function searchData() {
+      require(['jquery', 'jquery/ui'], function($){
+        let searchText = $('#search_text').val();
+        console.log(searchText);
+        $.ajax({
+          type: "POST",
+          url: "<?php echo $block->getBaseUrl().'blog/index/crud'; ?>",
+          data: {'search_text': searchText, 'method_type': 'SEARCH_DATA'},
+          datatype: "json",
+          success: function(response) {
+                  debugger
+                  console.log(response);
+                 }
+        });
+      });
+    }
+
+    function deleteRecord(recordId) {
+      console.log(recordId);
+      let deleteStatus = confirm('Do you wamt to delete this record ?');
+      if(deleteStatus) {
+        require(['jquery', 'jquery/ui'], function($){
+          $.ajax({
+            type: "POST",
+            url: "<?php echo $block->getBaseUrl().'blog/index/crud'; ?>",
+            data: {'id': recordId, 'method_type': 'DELETE_RECORD'},
+            datatype: "json",
+            success: function(response) {
+              let responseObj = JSON.parse(response);
+              if(responseObj.status) {
+                $("#list_"+recordId).remove();
+              }
+            }
+          });
+        });
+      }
+    }
+</script>

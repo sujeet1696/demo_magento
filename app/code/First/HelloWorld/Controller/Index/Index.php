@@ -4,7 +4,7 @@ namespace First\HelloWorld\Controller\Index;
 class Index extends \Magento\Framework\App\Action\Action
 {
 	protected $_pageFactory;
-	// protected $title;
+	protected $title;
 
 	public function __construct(\Magento\Framework\App\Action\Context $context,\Magento\Framework\View\Result\PageFactory $pageFactory)
 	{
@@ -14,7 +14,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
 	// public function execute()
 	// {
-	// 	echo $this->setTitle('Welcome');
+	// 	echo $this->setTitle('Welcome Ksolves');
 	// 	echo $this->getTitle();
 	// }
 	//
@@ -27,6 +27,7 @@ class Index extends \Magento\Framework\App\Action\Action
 	// {
 	// 	return $this->title;
 	// }
+	
 	public function execute()
 	{
 		return $this->_pageFactory->create();

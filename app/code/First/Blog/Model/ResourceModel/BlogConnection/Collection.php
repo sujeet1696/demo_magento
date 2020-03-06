@@ -1,5 +1,5 @@
 <?php
-namespace Ksolves\HelloWorld\Model\ResourceModel\Post;
+namespace First\Blog\Model\ResourceModel\BlogConnection;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
@@ -10,8 +10,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         $this->_init(
-            'Ksolves\HelloWorld\Model\Post',
-            'Ksolves\HelloWorld\Model\ResourceModel\Post'
+            'First\Blog\Model\BlogConnection',
+            'First\Blog\Model\ResourceModel\BlogConnection'
         );
     }
 }

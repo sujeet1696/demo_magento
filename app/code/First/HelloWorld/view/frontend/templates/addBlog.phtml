@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <body>
+    <form  style="width: 80%; text-align: left; border: 54px; padding: 8%;">
+      <div class="container">
+        <h1 style="text-align:center;">Add Your Block</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+        <label for="email"><b>Name:</b></label>
+        <input type="text" placeholder="Name" name="name" required>
+
+        <label for="psw"><b>Email:</b></label>
+        <input type="email" placeholder="Email" name="email" required>
+
+        <label for="psw-repeat"><b>Title</b></label>
+        <input type="password" placeholder="Blog Title" name="title" required>
+
+        <label for="cars">Choose blog type:</label>
+        <select id="cars">
+          <option value="1" selected="true">Fashion</option>
+          <option value="2">Food</option>
+          <option value="3">Travel</option>
+          <option value="4">Music</option>
+          <option value="5">Fitness</option>
+          <option value="6">Sports</option>
+        </select>
+        <label for="cars">Description:</label>
+        <textarea
+            rows="4" cols="50"
+            class="inline-wysiwyg-textarea"
+            afterRender="initTextarea"
+            placeholder="Description"></textarea>
+        <hr>
+        <button type="submit" class="registerbtn">Register</button>
+      </div>
+    </form>
+  </body>
+</html>

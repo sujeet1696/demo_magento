@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<?php
+  $response = $block->getSingleRecord();
+  $isSetOptions = false;
+  $options = array(1 => 'Fashion', 2 => 'Food', 3 => 'Travel', 4 => 'Music', 5 => 'Fitness', 6 => 'Sports');
+ ?>
+<html lang="en" dir="ltr">
+  <body>
+    <div class="container" style="justify-content: center; padding: 8%;">
+    <form  data-mage-init='{"validation":{}}' method="post" action="<?php echo $block->getBaseUrl().'blog/index/crud'; ?>">
+        <?php if(isset($response['data']) && !empty($response['data'])) {?>
+          <h1 style="text-align:center;">Update Your Block</h1>
+          <p><b style="color:red;">Please fill in this form to update a blog.</b></p>
+          <input type="hidden" name="method_type" value="UPDATE_RECORD">
+          <input type="hidden" name="id" value="<?php $response['data']['id']; ?>">
+        <?php } else {?>
+          <h1 style="text-align:center;">Add Your Block</h1>
+          <p><b style="color:red;">Please fill in this form to create a blog.</b></p>
+          <input type="hidden" name="method_type" value="SAVE">
+        <?php } ?>
+        <hr>
+        <div style="padding: 10px;">
+          <label for="name"><b>Name:</b></label>
+          <input type="text" placeholder="Name" name="name" data-validate="{'validate-alphanum-with-spaces':true}" value="<?php echo (isset($response['data']['user_name']) && !empty($response['data']['user_name']) ? $response['data']['user_name'] : null);?>">
+        </div>
+        <div style="padding: 10px;">
+          <label for="email"><b>Email :</b><span style="color:red;">*</span></label>
+          <input type="email" placeholder="Email" name="email" data-validate="{required:true,'validate-email':true}" value="<?php echo (isset($response['data']['email_id']) && !empty($response['data']['email_id']) ? $response['data']['email_id'] : null);?>">
+        </div>
+        <div style="padding: 10px;">
+          <label for="phone"><b>Phone No. :</b></label>
+          <input type="number" placeholder="Phone Number" name="phone_number" data-validate="{required:true, 'validate-number':true, 'minlength':10}" value="<?php echo (isset($response['data']['phone_number']) && !empty($response['data']['phone_number']) ? $response['data']['phone_number'] : null);?>">
+        </div>
+        <div style="padding: 10px;">
+          <label for="psw-repeat"><b>Title :</b><span style="color:red;">*</span></label>
+          <input type="text" placeholder="Blog Title" name="title" data-validate="{required:true}"
+              value="<?php echo (isset($response['data']['title']) && !empty($response['data']['title']) ? $response['data']['title'] : null);?>">
+        </div>
+        <div style="padding: 10px;">
+          <label for="cars">Choose blog type:</label>
+          <select id="cars" name="blog_type">
+            <?php if(!$isSetOptions && isset($response['data']['blog_type']) && !empty($response['data']['blog_type'])) {
+              $isSetOptions = true;
+              for ($i=1; $i < 6; $i++) {
+                 if($response['data']['blog_type'] == $i) {
+                   echo "<option value=".$i." selected>".$options[$i]."</option>";
+                 } else {
+                   echo "<option value=".$i.">".$options[$i]."</option>";
+                 }
+              }} else {?>
+              <option value="1" selected="true">Fashion</option>
+              <option value="2">Food</option>
+              <option value="3">Travel</option>
+              <option value="4">Music</option>
+              <option value="5">Fitness</option>
+              <option value="6">Sports</option>
+            <?php } ?>
+          </select>
+        </div>
+        <div style="padding: 10px;">
+          <label for="cars">Description :</label><span style="color:red;">*</span>
+          <textarea
+          rows="4" cols="50"
+          data-validate="{required:true}"
+          class="inline-wysiwyg-textarea"
+          afterRender="initTextarea"
+          name="description"
+          placeholder="Description"><?php echo (isset($response['data']['description']) && !empty($response['data']['description']) ? $response['data']['description'] : null);?></textarea>
+        </div>
+        <hr>
+          <div style="display: flex; justify-content: space-between; padding: 0 20px;">
+            <?php if(isset($response['data']) && !empty($response['data'])) {?>
+              <button type="submit" style="color: green;" >Update Block</button>
+            <?php } else {?>
+              <button type="submit" style="color: green;" >Create Block</button>
+            <?php } ?>
+            <button style="color: orange;"><a href="http://127.0.0.1/megento2.3.3/blog/index/crud">Back</a></button>
+          </div>
+        </form>
+      </div>
+  </body>
+</html>

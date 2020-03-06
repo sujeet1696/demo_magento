@@ -7,7 +7,7 @@ class Test extends \Magento\Framework\App\Action\Action
 
 	public function execute()
 	{
-		$textDisplay = new \Magento\Framework\DataObject(array('text' => 'testing observer'));
+		$textDisplay = new \Magento\Framework\DataObject(array('text' => 'testing Ksolves'));
 		$this->_eventManager->dispatch('First_Helloworld_display_text', ['mp_text' => $textDisplay]);
 		echo $textDisplay->getText();
 		exit;
