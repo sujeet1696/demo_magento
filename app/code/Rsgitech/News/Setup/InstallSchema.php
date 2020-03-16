@@ -7,10 +7,10 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 
 class InstallSchema implements InstallSchemaInterface
 {
-    
+
   public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
   {
-      
+
     $newsTableName = $setup->getTable('rsgitech_news');
 
     if($setup->getConnection()->isTableExists($newsTableName) != true) {

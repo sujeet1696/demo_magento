@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+	  <add id="First_Grid::rsgitech" title="Grid" translate="title" module="First_Grid" sortOrder="90" dependsOnModule="First_Grid" resource="First_Grid::rsgitech"/>
+	  <add id="First_Grid::news" title="News" translate="title" module="First_Grid" parent="First_Grid::rsgitech" sortOrder="50" dependsOnModule="First_Grid" resource="First_Grid::news"/>
+	  <add id="First_Grid::news_allnews" title="All News" translate="title" module="First_Grid" parent="First_Grid::news" sortOrder="10" dependsOnModule="First_Grid" action="news/allnews" resource="First_Grid::news_allnews"/>
+	  <add id="First_Grid::settings" title="Settings" translate="title" module="First_Grid" parent="First_Grid::rsgitech" sortOrder="60" dependsOnModule="First_Grid" resource="First_Grid::settings"/>
+	  <add id="First_Grid::news_config" title="Configuration" translate="title" module="First_Grid" parent="First_Grid::settings" sortOrder="10" dependsOnModule="First_Grid" action="adminhtml/system_config/edit/section/First_Grid" resource="First_Grid::news_config"/>
+	</menu>
+</config>

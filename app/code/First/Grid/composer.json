@@ -1,0 +1,28 @@
+{
+  "name": "Registration/News",
+  "description":"Registratipon ",
+  "require": {
+    "magento/framework": "102.0.|103.0."
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Ksolves",
+      "email": "sujeet.kumar@ksolves.com",
+      "role": "Magento 2 Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Registration\\News\\": ""
+    }
+  }
+}

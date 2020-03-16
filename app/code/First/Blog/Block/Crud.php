@@ -11,11 +11,14 @@ class Crud extends \Magento\Framework\View\Element\Template
 {
   protected $_Conn;
   protected $customCollection;
+	protected $_productCollectionFactory;
 
   public function __construct(\Magento\Framework\View\Element\Template\Context $context,
+                              \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
                               BlogConnectionFactory $blogConn)
 	{
     $this->_Conn = $blogConn;
+		$this->_productCollectionFactory = $productCollectionFactory;
 		parent::__construct($context);
 	}
 
@@ -56,4 +59,13 @@ class Crud extends \Magento\Framework\View\Element\Template
   {
       return $this->getChildHtml('pager');
   }
+
+  public function getProductCollection()
+	{
+			$collection = $this->_productCollectionFactory->create();
+			$collection->addAttributeToSelect('*');
+			$collection->setOrder('price','DESC');
+			$collection->setPageSize(5); // fetching only 3 products
+			return $collection;
+	}
 }
